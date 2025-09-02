@@ -1,5 +1,8 @@
 package ex04;
 
+import java.util.Locale;
+import java.util.Scanner;
+
 /**
  * Em um banco, para se cadastrar uma conta bancária, é necessário informar o número da conta, o nome do
  * titular da conta, e o valor de depósito inicial que o titular depositou ao abrir a conta. Este valor de depósito
@@ -20,6 +23,42 @@ package ex04;
 
 public class Main {
     public static void main(String args[]){
-        
+        Account account;
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter account number:");
+        int number = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter account holder:");
+        String holder = sc.nextLine();
+        System.out.println("Is therena initial deposit (y/n)?");
+        char response = sc.next().charAt(0);
+
+        if(response == 'y'){
+            System.out.println("Enter a depositvalue:");
+            double initialDeposit = sc.nextDouble();
+            account = new Account(number, holder, initialDeposit);
+        }
+        else{
+            account = new Account(number, holder);
+        }
+
+        System.out.println("Account data:");
+        System.out.println(account);
+
+        System.out.println("Enter a depositvalue:");
+        double depositValue = sc.nextDouble();
+        account.deposit(depositValue);
+        System.out.println("Updated accountdata:");
+        System.out.println(account);
+
+        System.out.println(" Enter a withdraw value:");
+        double withdrowValue = sc.nextDouble();
+        account.withdraw(withdrowValue);
+        System.out.println("Updated accountdata:");
+        System.out.println(account);
+
+        sc.close();
     }
 }
